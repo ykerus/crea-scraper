@@ -1,0 +1,8 @@
+# Changes here will be overwritten by Copier
+_commit: fdb94f1
+_src_path: gh:ykerus/project-template-copier
+module_name: Yke Rusticus
+package_name: crea_scraper
+project_description: We scrape the CREA website in order to create an overview of
+    the available courses, their times and availability in CSV format, and track this
+    data over time.
