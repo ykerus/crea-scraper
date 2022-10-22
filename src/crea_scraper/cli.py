@@ -1,7 +1,6 @@
-import time
-
-import pandas as pd
 import typer
+
+from crea_scraper import scraper
 
 app = typer.Typer()
 
@@ -24,10 +23,5 @@ def crea(
     Help: run `scrape crea --help`
 
     """
-
-    pd.DataFrame(
-        [
-            {"x": time.time(), "y": time.time() + 10},
-            {"time": time.time() + 1, "y": time.time() + 11},
-        ]
-    ).to_csv(output_path)
+    course_data = scraper.run()
+    scraper.write_course_data(course_data, output_path)
