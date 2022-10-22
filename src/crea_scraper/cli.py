@@ -5,7 +5,7 @@ import typer
 
 app = typer.Typer()
 
-OUTPUT_PATH_DEFAULT = typer.Argument("output/data.csv", help="Path to write data to")
+OUTPUT_PATH = typer.Argument(default="output/data.csv", help="Path to write data to")
 
 
 @app.callback()
@@ -16,13 +16,15 @@ def main() -> None:
 
 @app.command()
 def crea(
-    output_path: str = OUTPUT_PATH_DEFAULT,
+    output_path: str = OUTPUT_PATH,
 ) -> None:
     """Scrape CREA website
 
-    For help run `scrape crea --help`
+    Usage: run `scrape crea`
+    Help: run `scrape crea --help`
 
     """
+
     pd.DataFrame(
         [
             {"x": time.time(), "y": time.time() + 10},
