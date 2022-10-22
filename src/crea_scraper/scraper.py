@@ -245,7 +245,7 @@ def get_courses_data(courses_html) -> pd.DataFrame:
 
 
 def write_course_data(df: pd.DataFrame, output_path: str) -> None:
-    df.to_csv(output_path, index=False, sep=";")
+    df.to_csv(output_path, index=False, sep=",")
 
 
 def run() -> pd.DataFrame:

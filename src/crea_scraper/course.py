@@ -1,8 +1,20 @@
 from dataclasses import dataclass
 
 
+class CourseClass:
+    def __post_init__(self):
+        self._replace_commas()
+
+    def _replace_comma(self, attr: str, replacement=";"):
+        self.__setattr__(attr, self.__getattribute__(attr).replace(",", replacement))
+
+    def _replace_commas(self, replacement=";"):
+        for attr in self.__dict__.keys():
+            self._replace_comma(attr, replacement)
+
+
 @dataclass
-class CourseGeneralInfo:
+class CourseGeneralInfo(CourseClass):
     url: str
     naam: str  # e.g. zangles
     categorie: str  # e.g. muziek
@@ -10,7 +22,7 @@ class CourseGeneralInfo:
 
 
 @dataclass
-class Course:
+class Course(CourseClass):
     naam: str  # e.g zangles
 
     dag: str  # e.g. ma, di, ...
