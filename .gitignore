@@ -131,6 +131,6 @@ dmypy.json
 # Custom
 notebooks/development/
 .vscode
-poetry.lock
+# poetry.lock
 .DS_Store
 data/
