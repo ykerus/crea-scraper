@@ -4,7 +4,9 @@ from crea_scraper import scraper
 
 app = typer.Typer()
 
-OUTPUT_PATH = typer.Argument(default="output/data.csv", help="Path to write data to")
+OUTPUT_PATH = typer.Argument(
+    default="output/course_data.csv", help="Path to write data to"
+)
 
 
 @app.callback()
