@@ -1,6 +1,6 @@
 import typer
 
-from crea_scraper import scraper
+from crea_scraper import data, scraper
 
 app = typer.Typer()
 
@@ -26,4 +26,4 @@ def crea(
 
     """
     course_data = scraper.run()
-    scraper.write_course_data(course_data, output_path)
+    data.write_course_data(course_data, output_path)

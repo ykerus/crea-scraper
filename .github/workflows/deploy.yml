@@ -1,0 +1,34 @@
+name: Deploy to Azure Container App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v0
+        with:
+          appSourcePath: ${{ github.workspace }}
+          acrName: ${{ secrets.REGISTRY_NAME }}
+          acrUsername: ${{ secrets.REGISTRY_USERNAME }}
+          acrPassword: ${{ secrets.REGISTRY_PASSWORD }}
+          resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+          containerAppName: crea-recommender
+          environmentVariables: OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} CREA_DEMO_PASSWORD=${{secrets.CREA_DEMO_PASSWORD}}
+
+      - name: Enable Ingress to app
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            # enable public access to the container on port 80 (as specified in Dockerfile)
+            az containerapp ingress enable -n crea-recommender -g yke-rusticus-sandbox --type external --target-port 80 --transport auto

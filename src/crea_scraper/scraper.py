@@ -8,6 +8,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 from crea_scraper.course import Course, CourseGeneralInfo
+from crea_scraper.data import write_course_data
 
 
 async def _request_async(session, url: str):
@@ -242,10 +243,6 @@ def get_courses_data(courses_html) -> pd.DataFrame:
     df = courses_data_df.merge(general_info_df, how="inner", on="naam")
     assert len(df) >= len(courses_data_df), "Each course should have general info"
     return df
-
-
-def write_course_data(df: pd.DataFrame, output_path: str) -> None:
-    df.to_csv(output_path, index=False, sep=",")
 
 
 def run() -> pd.DataFrame:
