@@ -23,6 +23,7 @@ jobs:
           acrUsername: ${{ secrets.REGISTRY_USERNAME }}
           acrPassword: ${{ secrets.REGISTRY_PASSWORD }}
           resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+          imageToBuild: slackgpt.azurecr.io/crea_recommender:latest
           containerAppName: crea-recommender
           environmentVariables: OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} CREA_DEMO_PASSWORD=${{secrets.CREA_DEMO_PASSWORD}}
 
