@@ -32,4 +32,4 @@ jobs:
         with:
           inlineScript: |
             # enable public access to the container on port 80 (as specified in Dockerfile)
-            az containerapp ingress enable -n crea-recommender -g yke-rusticus-sandbox --type external --target-port 80 --transport auto
+            az containerapp ingress enable -n crea-recommender -g xebia-slackgpt-playground --type external --target-port 80 --transport auto
