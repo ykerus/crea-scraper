@@ -26,7 +26,7 @@ For example:
       social, sociaal, no skill, communicatie, praten, people, conversation, beginner, ...
 
 Note:
-    - The user query caqn be in either English or Dutch.
+    - The user query can be in either English or Dutch.
     - The keywords should be a mix of both English and Dutch (without indicating the language).
     - Keep the keywords concise, try to avoid uncommon composites, e.g. balletlessen.
     - The output should only be the keywords or phrases, separated by a comma, nothing more.
