@@ -4,11 +4,9 @@ import time
 import openai
 import pandas as pd
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
-from crea_scraper.data import (get_course_documents_for_search,
-                               load_course_data, prepare_for_search)
+from crea_scraper.data import get_course_documents_for_search, load_course_data, prepare_for_search
 
 openai.api_type = os.environ["OPENAI_API_TYPE"]
 openai.api_base = os.environ["OPENAI_API_BASE"]
@@ -16,9 +14,7 @@ openai.api_version = os.environ["OPENAI_API_VERSION"]
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
-def create_vector_db(
-    data_for_seach: pd.DataFrame, save_path: str, save: bool = True
-) -> FAISS:
+def create_vector_db(data_for_seach: pd.DataFrame, save_path: str, save: bool = True) -> FAISS:
     embeddings = OpenAIEmbeddings(
         model="text-embedding-ada-002",
         chunk_size=1,

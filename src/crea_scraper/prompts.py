@@ -3,12 +3,11 @@ from langchain.prompts import PromptTemplate
 
 
 def search_prompt_template() -> PromptTemplate:
-
     template = """
 I have a database with course titles and descriptions in both English and Dutch.
 For a given user query, I want to find the most interesting courses in the database for the user.
-I need you to convert the user query to a set of keywords in both english and dutch that match the intent of the user.
-These keywords can then be used to do similarity search over the database.
+I need you to convert the user query to a set of keywords in both english and dutch that match
+the intent of the user. These keywords can then be used to do similarity search over the database.
 
 For example:
     - User query: I want to do something practical with my hands.
@@ -19,7 +18,7 @@ For example:
       spreken, taal, Spaans, Frans, language, French, new language, niet Nederlands, not English ...
     - User query: I like to play a new instrument. I already play guitar.
       instrument, music, play, not guitar, piano, muziek maken, viool, drums, jammen, jamming, ...
-      * note that the user already plays guitar and wants to learn something new, so guitar is negated.
+      * note: the user already plays guitar and wants to learn something new, so guitar is negated.
     - Ik dans ballet, maar nu wil ik iets nieuws leren.
       dansen, not ballet, hip hop, salsa, geen ballet,...
     - User query: Ik wil iets sociaals doen, maar niet iets waar skill voor nodig is.

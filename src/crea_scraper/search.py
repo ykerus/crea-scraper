@@ -50,7 +50,6 @@ def get_relevant_courses(
     vector_db_path: str = "output/vector_db",
     verbose: bool = True,
 ) -> List[Document]:
-
     assert method in ["embedding", "tfidf"]
 
     search_query = prepare_query_for_search(query)
@@ -63,3 +62,5 @@ def get_relevant_courses(
         return embedding_search(
             search_query, k, vector_db_path
         )  # courses already stored in vector db
+    else:
+        raise ValueError(f"Method {method} not supported.")

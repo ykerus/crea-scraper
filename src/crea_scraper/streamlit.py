@@ -4,8 +4,7 @@ import pandas as pd
 import streamlit as st
 from streamlit import error, session_state, text_input  # type: ignore
 
-from crea_scraper.data import (get_course_documents_for_search,
-                               load_course_data, prepare_for_search)
+from crea_scraper.data import get_course_documents_for_search, load_course_data, prepare_for_search
 from crea_scraper.search import get_relevant_courses
 
 demo_password = os.environ["CREA_DEMO_PASSWORD"]
@@ -32,15 +31,11 @@ def check_password():
 
     if "password_correct" not in session_state:
         # First run, show input for password.
-        text_input(
-            "Password", type="password", on_change=password_entered, key="password"
-        )
+        text_input("Password", type="password", on_change=password_entered, key="password")
         return False
     elif not session_state["password_correct"]:
         # Password not correct, show input + error.
-        text_input(
-            "Password", type="password", on_change=password_entered, key="password"
-        )
+        text_input("Password", type="password", on_change=password_entered, key="password")
         error("😕 Password incorrect")
         return False
     else:
@@ -53,14 +48,11 @@ def make_clickable(url):
 
 
 def app():
-
     st.title("Crea course recommender")
     st.write("Enter your interests below")
     interests = st.text_area("Interests", "I like to draw and paint")
 
-    n_recommendations = st.slider(
-        "Number of recommendations", min_value=1, max_value=10, value=3
-    )
+    n_recommendations = st.slider("Number of recommendations", min_value=1, max_value=10, value=3)
 
     # center relative to the width of the page
     # _, center, _ = st.columns([1, 6, 1]) - this is too far to the left
@@ -79,9 +71,7 @@ def app():
             verbose=True,
         )
         course_names = [course.metadata["naam"] for course in recommendations]
-        course_links = [
-            make_clickable(course.metadata["url"]) for course in recommendations
-        ]
+        course_links = [make_clickable(course.metadata["url"]) for course in recommendations]
         # course_names = ["Course 1", "Course 2", "Course 3"]
         # course_links = [make_clickable("www.nos.nl") for course in course_names]
         # table with "naam" as index and clickable urls with shortcut "link"
