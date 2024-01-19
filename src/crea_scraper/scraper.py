@@ -139,8 +139,13 @@ def _get_raw_table_data(table_html, incl_empty_values=True):
     rows = table_html.find_all("tr")
     for row in rows:
         cols = row.find_all("td")
-        cols = [e.text.strip() for e in cols]
-        table_data.append([e for e in cols if e or incl_empty_values])
+        cols_extracted = []
+        for col in cols:
+            if col.find("img"):
+                cols_extracted.append(", ".join([img["title"] for img in col.find_all("img")]))
+            else:
+                cols_extracted.append(col.text.strip())
+        table_data.append([e for e in cols_extracted if e or incl_empty_values])
     return table_data
 
 
@@ -171,17 +176,6 @@ def _separate_time_from_day(table_dict):
     return table_dict
 
 
-def _rename_table_columns(table_dict):
-    try:
-        table_dict["cursus_type"] = table_dict["cursus type"]
-        del table_dict["cursus type"]
-    except KeyError:
-        print(f"Key 'cursus type' not found in {table_dict.keys()}")
-        table_dict["cursus_type"] = ""
-
-    return table_dict
-
-
 def _extract_data_from_table(table_html):
     table_data = _get_raw_table_data(table_html)
     table_dict = _get_dict_from_raw_table_data(table_data)
@@ -190,11 +184,7 @@ def _extract_data_from_table(table_html):
 
 
 def _get_course_status(register_link_html):
-    if "vol" in register_link_html.text:
-        return "vol"
-    if "gestart" in register_link_html.text:
-        return "gestart"
-    return "open"
+    return register_link_html.text
 
 
 def _get_course_table_data(course_html) -> List[Dict]:
@@ -206,7 +196,6 @@ def _get_course_table_data(course_html) -> List[Dict]:
     table_data = []
     for table_html, register_link_html in zip(tables_html, register_links_html):
         table_dict = _extract_data_from_table(table_html)
-        table_dict = _rename_table_columns(table_dict)
         course_status = _get_course_status(register_link_html)
         table_dict["status"] = course_status
         table_data.append(table_dict)

@@ -37,5 +37,4 @@ class Course(CourseClass):
     cursusnummer: str  # 12345
     docent: str  # e.g. Yke Rusticus
     taal: str  # e.g. 🇳🇱
-    cursus_type: str  # e.g. Fysiek
     status: str  # e.g. open
