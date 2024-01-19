@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import os
 import time
 from typing import Dict, List, Tuple
@@ -9,6 +10,8 @@ from bs4 import BeautifulSoup
 
 from crea_scraper.course import Course, CourseGeneralInfo
 from crea_scraper.data import write_course_data
+
+logger = logging.getLogger(__name__)
 
 
 async def _request_async(session, url: str):
@@ -55,6 +58,8 @@ def get_course_overview_subpages_html_content(
     subpages_html = []
 
     while subpage_to <= max_subpages + 1:
+        logger.info(f"Requesting subpages {subpage_from} to {subpage_to} ...")
+
         subpages_html += asyncio.run(_multi_request_async(subpage_urls))
         if subpages_html[-1] is None:
             break
@@ -95,9 +100,7 @@ def _get_course_url(course_html, from_overview_page: bool = False) -> str:
 def get_course_urls(overview_courses_html: List) -> List[str]:
     course_urls = []
     for overview_course_html in overview_courses_html:
-        course_urls.append(
-            _get_course_url(overview_course_html, from_overview_page=True)
-        )
+        course_urls.append(_get_course_url(overview_course_html, from_overview_page=True))
     return course_urls
 
 
@@ -211,7 +214,6 @@ def _get_course_table_data(course_html) -> List[Dict]:
 
 
 def _get_course_data(course_html) -> Tuple[CourseGeneralInfo, List[Course]]:
-
     url = _get_course_url(course_html)
     print(f"Parsing {url} ...")
     general_info = CourseGeneralInfo(
@@ -246,10 +248,9 @@ def get_courses_data(courses_html) -> pd.DataFrame:
 
 
 def run() -> pd.DataFrame:
+    logger.info("Starting scraper ...")
     overview_subpages_html = get_course_overview_subpages_html_content()
-    overview_courses_html = get_courses_html_content_from_overview_subpages(
-        overview_subpages_html
-    )
+    overview_courses_html = get_courses_html_content_from_overview_subpages(overview_subpages_html)
 
     course_urls = get_course_urls(overview_courses_html)
     courses_html = get_courses_html_content(course_urls)
