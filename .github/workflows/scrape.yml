@@ -36,7 +36,7 @@ jobs:
           poetry install --no-interaction
       - name: Run scraper
         run: |
-          poetry run scrape crea
+          poetry run python src/crea_scraper/main.py
       - uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
