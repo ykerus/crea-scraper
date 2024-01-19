@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import os
+import re
 import time
 from typing import Dict, List, Tuple
 
@@ -131,6 +132,12 @@ def _get_course_name(course_html) -> str:
 def _get_course_description(course_html) -> str:
     parts = [e.text for e in course_html.find(class_="wpb_wrapper").findChildren("p")]
     description = "\n\n".join(parts)
+
+    description = re.sub(r"\.([a-zA-Z])", r". \1", description)
+    description = re.sub(r"\?([a-zA-Z])", r"? \1", description)
+    description = re.sub(r"\!([a-zA-Z])", r"! \1", description)
+    description = re.sub(r"([a-z])([A-Z])", r"\1, \2", description)
+
     return description
 
 
