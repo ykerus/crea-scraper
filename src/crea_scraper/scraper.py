@@ -260,6 +260,9 @@ def run() -> pd.DataFrame:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        format="%(levelname)s:%(funcName)s:%(lineno)d: %(message)s", level=logging.INFO
+    )
     start_time = time.time()
     write_course_data(run(), "output/course_data.csv")
     print("--- %s seconds ---" % (time.time() - start_time))
