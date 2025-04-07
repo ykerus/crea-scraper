@@ -44,7 +44,7 @@ def _get_course_overview_subpage_urls(
 
 
 def get_course_overview_subpages_html_content(
-    max_subpages: int = 100, n_sim_requests: int = 25
+    max_subpages: int = 26, n_sim_requests: int = 9
 ) -> List[str]:
     """
     -> [subpage_1, ..., subpage_n]
@@ -221,7 +221,13 @@ def _get_course_data(course_html) -> Tuple[CourseGeneralInfo, List[Course]]:
     course_data = []
     table_data = _get_course_table_data(course_html)
     for table in table_data:
-        course_data.append(Course(naam=general_info.naam, **table))
+        tbl = {}
+        for key in table:
+            if "prijs" in key:
+                tbl["prijs"] = table[key]
+            else:
+                tbl[key] = table[key]
+        course_data.append(Course(naam=general_info.naam, **tbl))
 
     print("Success!")
     return general_info, course_data
