@@ -44,7 +44,7 @@ def _get_course_overview_subpage_urls(
 
 
 def get_course_overview_subpages_html_content(
-    max_subpages: int = 26, n_sim_requests: int = 9
+    max_subpages: int = 27, n_sim_requests: int = 9
 ) -> List[str]:
     """
     -> [subpage_1, ..., subpage_n]

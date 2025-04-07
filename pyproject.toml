@@ -38,5 +38,5 @@ line-length = 100
 
 [dependency-groups]
 dev = [
-
+    "pre-commit>=4.2.0",
 ]

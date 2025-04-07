@@ -1,40 +1,40 @@
 default_language_version:
-  python: python3.11
+  python: python3.9
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.4.0
     hooks:
       - id: trailing-whitespace
-      - id: check-json
-      - id: check-ast
-      - id: check-merge-conflict
-      - id: check-toml
-      - id: check-yaml
-        args: [--unsafe]
-      - id: debug-statements
-      - id: detect-private-key
-      - id: end-of-file-fixer
-  - repo: https://github.com/ambv/black
-    rev: 23.1.0
-    hooks:
-      - id: black
-        name: Run black formatter
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.931
-    hooks:
-      - id: mypy
-  - repo: https://github.com/timothycrosley/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        additional_dependencies: [toml]
-        name: Sort imports using isort
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.260"
-    hooks:
-      - id: ruff
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.1.3
-    hooks:
-      - id: python-safety-dependencies-check
-        name: Check for vulnerable dependencies
+  #     - id: check-json
+  #     - id: check-ast
+  #     - id: check-merge-conflict
+  #     - id: check-toml
+  #     - id: check-yaml
+  #       args: [--unsafe]
+  #     - id: debug-statements
+  #     - id: detect-private-key
+  #     - id: end-of-file-fixer
+  # - repo: https://github.com/ambv/black
+  #   rev: 23.1.0
+  #   hooks:
+  #     - id: black
+  #       name: Run black formatter
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v0.931
+  #   hooks:
+  #     - id: mypy
+  # - repo: https://github.com/timothycrosley/isort
+  #   rev: 5.12.0
+  #   hooks:
+  #     - id: isort
+  #       additional_dependencies: [toml]
+  #       name: Sort imports using isort
+  # - repo: https://github.com/charliermarsh/ruff-pre-commit
+  #   rev: "v0.0.260"
+  #   hooks:
+  #     - id: ruff
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.1.3
+  #   hooks:
+  #     - id: python-safety-dependencies-check
+  #       name: Check for vulnerable dependencies

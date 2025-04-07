@@ -26,7 +26,7 @@ def get_course_documents_for_search(data_for_search: pd.DataFrame) -> List[Docum
 
 
 def write_course_data(df: pd.DataFrame, output_path: str) -> None:
-    df.to_csv(output_path, index=False, sep=",")
+    df.drop_duplicates().to_csv(output_path, index=False, sep=",")
 
 
 def load_course_data(path: str) -> pd.DataFrame:
